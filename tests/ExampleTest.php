@@ -1,16 +1,12 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+/*use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;*/
 
-class ExampleTest extends TestCase
+
+class ExampleTest extends FeatureTestCase
 {
-    //se crea una transacción para las consultas
-    //ejecutadas y al final se realiza un rollback
-    //para limpiar las tablas modificadas en la
-    //prueba
-    use DatabaseTransactions;
+    
     /**
      * A basic functional test example.
      *
