@@ -2,6 +2,7 @@
 
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
+    public $defaultUser;
     /**
      * The base URL to use while testing the application.
      *
@@ -21,5 +22,13 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    public function defaultUser()
+    {
+        if($this->defaultUser){
+            return $this->defaultUser;
+        }
+        return $this->defaultUser=factory(\App\User::class)->create();
     }
 }
