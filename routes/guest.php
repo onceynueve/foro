@@ -11,11 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('register', 
+	       ['uses'=>'RegisterController@create',
+	       'as'=>'register']
+	       );
 
-Auth::routes();
+Route::post('register', 
+	       ['uses'=>'RegisterController@store']
+	       );
 
-Route::get('/home', 'HomeController@index');
+Route::get('login', 
+	       ['uses'=>'LoginController@create',
+	       'as'=>'login']
+	       );
 
+Route::post('login', 
+	       ['uses'=>'LoginController@store',
+	       'as'=>'login']
+	       );

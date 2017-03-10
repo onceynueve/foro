@@ -1,4 +1,5 @@
 <?php
+use App\Post;
 
 class CreatePostsTest extends FeatureTestCase
 {
@@ -18,9 +19,16 @@ class CreatePostsTest extends FeatureTestCase
             'content'=>$content,
             'pending'=>true,
             'user_id'=>$user->id,
+            'slug'=>'esta-es-una-pregunta'
             ]);
 
-        $this->see($title);
+        $post=Post::first();
+
+        $this->seeInDatabase('subscriptions',[
+            'user_id'=>$user->id,
+            'post_id'=>$post->id]);
+
+        $this->seePageIs($post->url);
 
     }
 

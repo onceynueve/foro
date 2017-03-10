@@ -18,8 +18,10 @@ class CreatePostsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('title');
+            $table->string('slug');
             $table->mediumText('content');
             $table->boolean('pending')->default(true);
+            $table->unsignedInteger('answer_id')->nullable();
 
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class ExampleTest extends FeatureTestCase
      */
     public function testBasicExample()
     {
-        $user=factory(\App\User::class)->create(['name'=>'Fulano de Tal','email'=>'ful@no.tal']);
+        $user=factory(\App\User::class)->create(['first_name'=>'Fulano','last_name'=>'de Tal','email'=>'ful@no.tal']);
         $this->actingAs($user,'api')
              ->visit('api/user')
              ->see('ful@no.tal')

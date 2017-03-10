@@ -1,30 +1,43 @@
 <?php
 
-
 class ShowPostTest extends FeatureTestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+    
     public function test_a_user_can_see_the_post_details()
     {
         $user=$this->defaultUser(
-        	['name'=>'Fulano de Tal']
+        	['first_name'=>'Fulano',
+            'last_name'=>'de Tal']
         	);
 
-        $post=factory(\App\Post::class)->make(
+        $post=$this->createPost(
         	['title'=>'Este es el título del post',
-        	'content'=>'Este es el contenido del post']
+        	'content'=>'Este es el contenido del post',
+        	'user_id'=>$user->id]
         	);
 
-        $user->posts()->save($post);
-
-        $this->visit(route('posts.show',$post))
+        $this->visit($post->url)
              ->seeInElement('h1',$post->title)
              ->see($post->content)
-             ->see($user->name);
+             ->see("Fulano de Tal");
 
     }
+
+    public function test_post_url_with_wrong_slugs_still_work()
+    {
+        $post=$this->createPost(
+        	['title'=>'Old title',]);
+
+        $url=$post->url;
+
+        $post->update(['title'=>'New title']);
+
+        $this->get($url)
+             ->assertResponseStatus(404);
+
+        
+
+    }
+
+
 }
